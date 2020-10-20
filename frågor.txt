@@ -1,0 +1,70 @@
+1. När använder man add repektive commit?
+
+Add använder man för att lägga till en ny eller ändrad fil i staging area.
+Commit använder man för att skapa en ny revision av det man lagt till 
+i staging area med add.
+
+2. Vad är pull repektive push?
+
+Pull är att ladda ner repositories, antingen ett helt nytt eller en ny version
+av repositoriet från ett centralt repository. 
+Pull är en kombination av fetch och merge.
+Push är att ladda upp sitt repositorie till ett centralt repository.
+
+3. När använder man log repektive status?
+
+Log används för att visa vad som hänt i branchen.
+Status visar vad som är pågång t.ex. vilka filer som är addade till staging area 
+och vilka som inte är det samt vilken branch man arbetar i. 
+
+4. Hur kan man formulera sig i sina commit-meddelanden?
+
+Det är viktigt att meddelandet beskriver vad som är nytt jämfört med 
+tidigare versioner. Så har man lagt till en start metod så kan
+"Adding start method" vara ett bra meddelande. Det är också bra att 
+vara kortfattad så man inte behöver läsa mycket text för att hitta 
+det man söker men då man bör commita varje gång man är klar med en ändring.
+
+Jag siktar på VG.
+
+Olika sätt att rulla tillbaka kod.
+
+Ett sätt att rulla tillbaka kod är att använda "git checkout HEAD~n" där n 
+motsvarar antalet steg man vill rulla tillbaka, så vill man gå tillbaka ett 
+steg så använder man "git checkout HEAD~1". Det är bra att göra en ny 
+branch att rulla tillbaka koden i utifall något skulle gå fel så är det inte 
+i masterbranchen det blir konstigt. 
+
+När man rullar tillbaka kod på detta sättet behålls de nyare versionerna 
+och man kan enkelt gå tillbaka till sin senaste version med "git checkout master".
+Därför är detta bra om man bara behöver gå tillbaka till en tidigare version för
+för att titta, fixa, debugga, med mera men vill behålla allt man gjort.
+
+Kommandot "git checkout HEAD~1" ger meddelandet: 
+
+Note: checking out 'HEAD~1'.
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+git checkout -b <new-branch-name>
+HEAD is now at 994f832 a 
+
+git revert är ett annat sätt att rulla tillbaka kod och det använder man när 
+man vill ändra något som blivit fel t.ex. fel i koden eller commit meddelandet.
+"git revert HEAD" backar HEAD ett steg så man kan fixa det som var fel och commita
+sina ändringar på nytt. 
+
+Kommandot "git revert HEAD" ger meddelandet:
+
+[detached HEAD 60f62f5] Revert "a"                                                                                    
+2 files changed, 0 insertions(+), 0 deletions(-)                                                                     
+mode change 100755 => 100644 build.sh             
+mode change 100755 => 100644 run.sh 
+
+git reset är ett tredje sätt att rulla tilbaka kod som rullar tillbaka både staging area
+och working area. Detta används t.ex om man gjort ändringar som man inser är mindre
+bra och vill gå tillbaka till ett tidigare skede och börja om.
+
+"git reset --hard master~1" rullar tillbaka branchen master ett steg.
